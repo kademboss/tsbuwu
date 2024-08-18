@@ -27,6 +27,8 @@ end
 
 
 onAnimation("11365563255", function(animation)
-    loadstring(game:HttpGet"https://raw.githubusercontent.com/tamarixr/tamhub/main/invistablefli.lua")()
+    game.Players.LocalPlayer.Character.Humanoid.HipHeight = 20
+wait(5.5)
+game.Players.LocalPlayer.Character.Humanoid.HipHeight = 0
     warn("animation id:", animation.Animation.AnimationId)
 end)
