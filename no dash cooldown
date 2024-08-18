@@ -1,11 +1,4 @@
-
-local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()  -- Get the player's character
-local humanoid = character:WaitForChild("Humanoid")                 -- Get the humanoid of the character
-
--- Function that will run when the player dies
-local function onPlayerDeath()
-   -- Get the player and the player's character
+-- Get the player and the player's character
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
 local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
@@ -102,8 +95,3 @@ userInputService.InputEnded:Connect(function(input)
         isAPressed = false
     end
 end)
-    -- You can execute any code here, such as respawn logic, UI updates, etc.
-end
-
--- Connect the Died event to the onPlayerDeath function
-humanoid.Died:Connect(onPlayerDeath)
