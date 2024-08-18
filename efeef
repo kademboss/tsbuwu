@@ -1,0 +1,38 @@
+function onAnimation(id, func)
+    local id = tostring(id):gsub("rbxassetid://", "")
+    
+    local char = game:GetService("Players").LocalPlayer.Character
+    local humanoid = char and char:WaitForChild("Humanoid", 1)
+    if char and humanoid then
+        humanoid.AnimationPlayed:Connect(function(v)
+            local vID = v.Animation.AnimationId:gsub("rbxassetid://", "")
+            if id == vID then
+                func(v)
+            end
+        end)
+    end
+    game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
+        local humanoid = char and char:WaitForChild("Humanoid", 1)
+        if char and humanoid then
+            humanoid.AnimationPlayed:Connect(function(v)
+                local vID = v.Animation.AnimationId:gsub("rbxassetid://", "")
+                if id == vID then
+                    func(v)
+                end
+            end)
+        end
+    end)
+end
+
+
+
+onAnimation("17862992081", function(animation)
+        local music = Instance.new("Sound")
+local id = 17476297176
+music.Volume = 1
+music.PlaybackSpeed = 1
+music.Looped = false
+music.SoundId = "rbxassetid://"..id
+music:Play()
+music.Parent = game:GetService("ReplicatedStorage")
+end)
