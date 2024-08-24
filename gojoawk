@@ -1,32 +1,3 @@
-function onAnimation(id, func)
-    local id = tostring(id):gsub("rbxassetid://", "")
-    
-    local char = game:GetService("Players").LocalPlayer.Character
-    local humanoid = char and char:WaitForChild("Humanoid", 1)
-    if char and humanoid then
-        humanoid.AnimationPlayed:Connect(function(v)
-            local vID = v.Animation.AnimationId:gsub("rbxassetid://", "")
-            if id == vID then
-                func(v)
-            end
-        end)
-    end
-    game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(char)
-        local humanoid = char and char:WaitForChild("Humanoid", 1)
-        if char and humanoid then
-            humanoid.AnimationPlayed:Connect(function(v)
-                local vID = v.Animation.AnimationId:gsub("rbxassetid://", "")
-                if id == vID then
-                    func(v)
-                end
-            end)
-        end
-    end)
-end
-
-
-
-onAnimation("15503060232", function(animation)
 ------------------------------------<CONFIG>------------------------------------
 local CONFIG = {
 	TargetHipHeight = 35,        -- target hipheight
@@ -117,7 +88,7 @@ wait(CONFIG.StopWait)
 animationTrack:Stop()
 
 ------------------------------------<TRANSITION: RESET HIP HEIGHT>------------------------------------
--- sigma kadem
+-- i'm so done with your code
 
 wait(CONFIG.AnimationWait)
 
@@ -128,4 +99,3 @@ local animationTrack = humanoid:LoadAnimation(Anim)
 animationTrack:Play()
 animationTrack:AdjustSpeed(CONFIG.AnimationSpeed)
 transitionHipHeight(humanoid, CONFIG.ResetHipHeight, CONFIG.TransitionTime2)
-end)
