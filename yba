@@ -1,4 +1,5 @@
-for i,v in game.Players.LocalPlayer.Backpack:GetChildren() do
-    game.Players.LocalPlayer.Backpack.Humanoid:EquipTool(Util:GetPlayer().Backpack:FindFirstChild(v))
-     game.Players.LocalPlayer.Character.RemoteEvent:FireServer("EndDialogue", {NPC = "Merchant", Option = "Option1", Dialogue = "Dialogue5"})
- end
+AllItems = {"Blue Candy", "Green Candy", "Yellow Candy", "Red Candy", "Mysterious Arrow", "Pure Rokakaka", "Rokakaka", "Diamond", "Lucky Arrow", "Lucky Stone Mask", "Dio's Diary", "Steel Ball", "Rib Cage of The Saint's Corpse", "Stone Mask", "Gold Coin", "Quinton's Glove", "Ancient Scroll", "Caesar's Headband", "Clackers"};
+for i,v in pairs(Util:GetTable("ChosenItemsToSell")) do
+    Util:GetHumanoid():EquipTool(Util:GetPlayer().Backpack:FindFirstChild(v))
+     Util:GetCharacter().RemoteEvent:FireServer("EndDialogue", {NPC = "Merchant", Option = "Option1", Dialogue = "Dialogue5"})
+end
