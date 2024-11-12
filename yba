@@ -1,5 +1,42 @@
-AllItems = {"Blue Candy", "Green Candy", "Yellow Candy", "Red Candy", "Mysterious Arrow", "Pure Rokakaka", "Rokakaka", "Diamond", "Lucky Arrow", "Lucky Stone Mask", "Dio's Diary", "Steel Ball", "Rib Cage of The Saint's Corpse", "Stone Mask", "Gold Coin", "Quinton's Glove", "Ancient Scroll", "Caesar's Headband", "Clackers"};
-for i,v in pairs(Util:GetTable("ChosenItemsToSell")) do
-    Util:GetHumanoid():EquipTool(Util:GetPlayer().Backpack:FindFirstChild(v))
-     Util:GetCharacter().RemoteEvent:FireServer("EndDialogue", {NPC = "Merchant", Option = "Option1", Dialogue = "Dialogue5"})
+getgenv().RibPityFarm = true
+getgenv().WantedPity = 3
+--[[
+3 = 3%,
+2.4 = 2.4%, etc.
+
+10 Ribs = 1.4%
+20 Ribs = 1.8%
+]]--
+
+local Player = game.Players.LocalPlayer
+local Character = Player.Character or Player.CharacterAdded:Wait()
+
+local Pity = function()
+    return (Player.PlayerStats.PityCount.Value * 0.04) + 1
+end
+
+local CheckStand = function()
+    return Character.SummonedStand.Value
+end
+
+local UseRib = function()
+    local args = {[1] = "EndDialogue", [2] = { ["NPC"] = "Rib Cage of The Saint's Corpse", ["Option"] = "Option1", ["Dialogue"] = "Dialogue2" }}
+    game:GetService("Players").LocalPlayer.Character.RemoteEvent:FireServer(unpack(args))
+end
+
+while RibPityFarm do
+    if CheckStand() then
+        Player.Character.RemoteFunction:InvokeServer("ToggleStand", "Toggle")
+    end
+    
+    if Pity() >= WantedPity then
+        Player:Kick("You have:", Pity(), "Pity")
+    end
+    
+    UseRib()
+    
+    task.delay(2, function()
+        repeat task.wait() until CheckStand()
+        print(Pity())
+    end)
 end
